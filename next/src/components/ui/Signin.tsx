@@ -15,7 +15,7 @@ const Signin = ({ providers, callbackUrl }: Props) => {
         <div key={provider.name} className="flex justify-center w-full">
           <button
             onClick={() => signIn(provider.id, { callbackUrl })}
-            className="border m-4  flex w-1/5  justify-center items-center p-4 rounded-xl hover:bg-slate-700"
+            className="border m-4  flex w-1/5  justify-center items-center p-4 rounded-xl hover:bg-skyblue"
           >
             <p className=" font-bold me-2">Sign in {provider.name}</p>
             <Image

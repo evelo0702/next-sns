@@ -9,6 +9,9 @@ const nextConfig = {
       "ssl.pstatic.net",
       "avatars.githubusercontent.com",
       "k.kakaocdn.net",
+      "tailwindui.com",
+      "images.unsplash.com",
+      "cdn.sanity.io",
     ],
   },
 };

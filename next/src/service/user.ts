@@ -19,3 +19,13 @@ export async function addUser(user: OAuthUser) {
     bookmarks: [],
   });
 }
+
+export async function getUserByUsername(id: string) {
+  return client.fetch(`*[_type == 'user' && id == "${id}"][0]{
+    ...,
+    "id": _id,
+    following[]->{id,image},
+    followers[]->{id,image},
+    "bookmarks":bookmarks[]->_id
+  }`);
+}

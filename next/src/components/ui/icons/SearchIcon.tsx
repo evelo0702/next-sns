@@ -1,12 +1,5 @@
-import React from "react";
-import { FiSearch } from "react-icons/fi";
+import { RiSearchLine } from 'react-icons/ri';
 
-const SearchIcon = () => {
-  return (
-    <div>
-      <FiSearch className="w-7 h-7 me-2" />
-    </div>
-  );
-};
-
-export default SearchIcon;
+export default function SearchIcon() {
+  return <RiSearchLine className='w-6 h-6' />;
+}

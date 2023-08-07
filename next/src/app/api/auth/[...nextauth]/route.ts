@@ -1,5 +1,4 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
-
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import KakaoProvider from "next-auth/providers/kakao";
@@ -26,23 +25,33 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user: { id, email, name, image } }) {
-      if (!email) {
+    async signIn({ user }) {
+      if (!user.email) {
         return false;
       }
+
       addUser({
-        id,
-        name: name || "",
-        email: email || "",
-        image,
-        username: email.split("@")[0],
+        id: user.id.split("__")[0].split("-")[1] || user.id,
+        name: user.name || "",
+        email: user.email || "",
+        image: user.image,
+        username: user.email.split("@")[0],
       });
       return true;
+    },
+    async session({ session }) {
+      const user = session?.user;
+      if (user) {
+        session.user = {
+          ...user,
+          id: user.email?.split("@")[0] || "",
+        };
+      }
+      return session;
     },
   },
   pages: {
     signIn: "/auth/signin",
-    signOut: "/auth/signout",
   },
 };
 

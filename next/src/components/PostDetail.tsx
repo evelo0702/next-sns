@@ -36,68 +36,12 @@ const PostDetail = ({ items, post }: Props) => {
           <ul className="border-t border-gray-200  overflow-y-auto p-2 mb-1">
             {post.comments &&
               post.comments.map((item, index) => (
-                <div>
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>{" "}
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>{" "}
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>{" "}
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>{" "}
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>{" "}
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>{" "}
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>{" "}
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>{" "}
-                  <li className="flex items-center mb-1" key={index}>
-                    <div className="flex items-center">
-                      <span className="font-bold mr-2">{item.id}</span>
-                      <span>{item.comment}</span>
-                    </div>
-                  </li>
-                </div>
+                <li className="flex items-center mb-1" key={index}>
+                  <div className="flex items-center">
+                    <span className="font-bold mr-2">{item.id}</span>
+                    <span>{item.comment}</span>
+                  </div>
+                </li>
               ))}
           </ul>
         </div>
