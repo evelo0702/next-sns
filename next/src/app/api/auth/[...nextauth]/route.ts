@@ -6,6 +6,7 @@ import NaverProvider from "next-auth/providers/naver";
 import { addUser } from "@/service/user";
 
 const authOptions: NextAuthOptions = {
+  secret: process.env.AUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_OAUTH_ID || "",

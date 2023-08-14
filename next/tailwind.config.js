@@ -20,7 +20,7 @@ module.exports = {
         gradientStart: "#30cfd0",
         gradientEnd: "#330867",
         avatarGradientStart: "#a1c4fd",
-        avatarGradientEnd: "#c2e9fb",
+        avatarGradientEnd: "#4286f4",
       },
     },
   },

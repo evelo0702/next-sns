@@ -11,12 +11,13 @@ type Props = {
 };
 const SignPage = async ({ searchParams: { callbackUrl } }: Props) => {
   const session = await getServerSession(authOptions);
+
   if (session) {
     redirect("/");
   }
   const providers = (await getProviders()) ?? {};
   return (
-    <section className="mt-24">
+    <section className="mt-24 mb-24">
       <Signin providers={providers} callbackUrl={callbackUrl ?? "/"} />
     </section>
   );

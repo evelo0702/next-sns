@@ -8,7 +8,7 @@ export async function GET() {
   if (!user) {
     return new Response("Authentication Error", { status: 401 });
   }
-  let userData = getUserByUsername(user.id).then((data) =>
+  let userData = getUserByUsername(user.email).then((data) =>
     NextResponse.json(data)
   );
   return userData;

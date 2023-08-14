@@ -15,14 +15,14 @@ const Signin = ({ providers, callbackUrl }: Props) => {
         <div key={provider.name} className="flex justify-center w-full">
           <button
             onClick={() => signIn(provider.id, { callbackUrl })}
-            className="border m-4  flex w-1/5  justify-center items-center p-4 rounded-xl hover:bg-skyblue"
+            className="border m-4  flex w-4/5  justify-center items-center p-4 rounded-xl hover:bg-skyblue"
           >
-            <p className=" font-bold me-2">Sign in {provider.name}</p>
+            <p className="font-bold me-2">Sign in {provider.name}</p>
             <Image
               src={`/${provider.name}.png`}
               alt=""
-              width={40}
-              height={40}
+              width={80}
+              height={80}
             ></Image>
           </button>{" "}
         </div>

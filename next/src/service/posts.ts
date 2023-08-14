@@ -1,11 +1,11 @@
 import { SimplePost } from "@/app/model/post";
 import { client, urlFor } from "./sanity";
 
-export async function getFollowingPostsOf(id: string) {
+export async function getFollowingPostsOf(email: string) {
   return client
     .fetch(
-      `*[_type =='post' && author->id == "${id}"
-  || author._ref in *[_type == 'user' && id =="${id}"].following[]._ref]
+      `*[_type =='post' && author->email == "${email}"
+  || author._ref in *[_type == 'user' && email == "${email}" ].following[]._ref]
   | order(_createAt desc){
        ...,
    "id": author->id,
