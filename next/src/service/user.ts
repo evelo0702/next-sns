@@ -1,3 +1,4 @@
+import { SearchUser } from "@/app/model/user";
 import { client } from "./sanity";
 type OAuthUser = {
   id: string;
@@ -28,4 +29,25 @@ export async function getUserByUsername(email: string) {
     followers[]->{id,image},
     "bookmarks":bookmarks[]->_id
   }`);
+}
+
+export function searchUsers(keyword?: string) {
+  const query = keyword
+    ? `&& (name match "${keyword}") || (id match "${keyword}")`
+    : "";
+  return client
+    .fetch(
+      `*[_type == 'user' ${query}]{
+    ...,
+    "following":count(following),
+    "followers":count(followers)
+  }`
+    )
+    .then((users) =>
+      users.map((user: SearchUser) => ({
+        ...user,
+        following: user.following ?? 0,
+        followers: user.followers ?? 0,
+      }))
+    );
 }

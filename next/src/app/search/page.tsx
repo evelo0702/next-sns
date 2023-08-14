@@ -1,7 +1,10 @@
-import React from "react";
+import UserSearch from "@/components/UserSearch";
 
-const SearchPage = () => {
-  return <div>search</div>;
+const SearchPage = async () => {
+
+  return <div>
+    <UserSearch/>
+  </div>;
 };
 
 export default SearchPage;
