@@ -12,6 +12,8 @@ export type DetailUser = User & {
 };
 
 export type SearchUser = User & {
-  following: number;
-  followers:number;
-}
+  following: simpleUser[];
+  followers: simpleUser[];
+  followingNum: number;
+  followersNum: number;
+};

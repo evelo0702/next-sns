@@ -7,7 +7,7 @@ type Props = {
   user: SearchUser;
 };
 const UserCard = ({
-  user: { name, id, image, following, followers },
+  user: { name, id, image, followersNum, followingNum },
 }: Props) => {
   return (
     <Link
@@ -18,7 +18,7 @@ const UserCard = ({
       <div className="text-neutral-500 ms-4">
         <p className="text-black font-bold leading-4">{id}</p>
         <p>{name}</p>
-        <p className="text-sm leading-4">{`${followers} followers ${following} following`}</p>
+        <p className="text-sm leading-4">{`${followersNum} followers ${followingNum} following`}</p>
       </div>
     </Link>
   );

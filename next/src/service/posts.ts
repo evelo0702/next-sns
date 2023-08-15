@@ -1,4 +1,4 @@
-import { SimplePost } from "@/app/model/post";
+import { FullPost, SimplePost } from "@/app/model/post";
 import { client, urlFor } from "./sanity";
 
 export async function getFollowingPostsOf(email: string) {
@@ -22,6 +22,32 @@ export async function getFollowingPostsOf(email: string) {
      "createdAt":_createdAt
  }
  `
+    )
+    .then((posts) =>
+      posts.map((post: SimplePost) => ({
+        ...post,
+        image1: urlFor(post.image1),
+        image2: urlFor(post.image2),
+        image3: urlFor(post.image3),
+        image4: urlFor(post.image4),
+      }))
+    );
+}
+
+export function getUserPost(id: string) {
+  return client
+    .fetch(
+      `*[_type =='post' && author->id == "${id}"]| order(_createAt desc){...,
+  "authorId":author->id,
+  "userImage" : author->image,"image1" : photo1,
+  "image2" : photo2 ,
+  "image3" : photo3 ,
+ "image4" : photo4 ,     "likes": likes[]->id,
+ "likesCount":count(likes),
+ "content": content,
+     "commentsCount": count(comments),
+     comments[]{comment, "id": author->id, "image": author->image},
+     "createdAt":_createdAt}`
     )
     .then((posts) =>
       posts.map((post: SimplePost) => ({

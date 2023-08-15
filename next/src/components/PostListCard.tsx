@@ -51,7 +51,7 @@ const PostListCard = ({ post, index }: Props) => {
   }
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div className="border border-gray-200 shadow-md rounded-lg max-w-[500px] mx-auto h-[800px] mb-4">
+    <div className="border border-gray-200 shadow-md rounded-lg max-w-[500px] mx-auto h-[750px] mb-4">
       <Link
         href={"/"}
         className="h-[70px] w-32 mt-2 ms-2 border-b flex items-center"
@@ -74,7 +74,7 @@ const PostListCard = ({ post, index }: Props) => {
         commentsCount={commentsCount}
         detail={false}
       />
-      <CommentForm />
+
       {openModal && (
         <ModalProtal>
           <PostModal onClose={() => setOpenModal(false)}>

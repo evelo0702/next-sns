@@ -39,15 +39,17 @@ export function searchUsers(keyword?: string) {
     .fetch(
       `*[_type == 'user' ${query}]{
     ...,
-    "following":count(following),
-    "followers":count(followers)
+    following[]->{id,image},
+    followers[]->{id,image},
+    "followingNum":count(following),
+    "followersNum":count(followers)
   }`
     )
     .then((users) =>
       users.map((user: SearchUser) => ({
         ...user,
-        following: user.following ?? 0,
-        followers: user.followers ?? 0,
+        followingNum: user.followingNum ?? 0,
+        followersNum: user.followersNum ?? 0,
       }))
     );
 }
