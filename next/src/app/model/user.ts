@@ -16,4 +16,5 @@ export type SearchUser = User & {
   followers: simpleUser[];
   followingNum: number;
   followersNum: number;
+  posts: number;
 };

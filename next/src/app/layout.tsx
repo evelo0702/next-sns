@@ -7,8 +7,11 @@ import SWRConfigContext from "@/context/SWRConfigContext";
 const OpenSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Euphoria",
-  description: "With Euphoria - Social Network Service by EVELO ",
+  title: {
+    default: "BLISS",
+    template: "BLISS | %s",
+  },
+  description: "With BLISS - Social Network Service by EVELO ",
 };
 export default function RootLayout({
   children,

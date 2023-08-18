@@ -17,6 +17,7 @@ export type FullPost = {
   content: string;
   createdAt: string;
   likes: string[];
+  likesCount: number;
   commentsCount: number;
   comments: Comment[];
 };

@@ -33,7 +33,7 @@ const Navbar = () => {
           <div className="text-2xl ms-4 ">
             <Link href={"/"}>
               <p className="bg-gradient-to-tr font-bold from-gradientStart to-gradientEnd bg-clip-text text-transparent">
-                Euphoria
+                BLISS
               </p>
             </Link>
           </div>

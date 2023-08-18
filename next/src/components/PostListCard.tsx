@@ -1,5 +1,5 @@
 "use client";
-import { SimplePost } from "@/app/model/post";
+import { FullPost, SimplePost } from "@/app/model/post";
 import React, { useState } from "react";
 import Avatar from "./Avatar";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import PostModal from "./PostModal";
 import PostDetail from "./PostDetail";
 
 type Props = {
-  post: SimplePost;
+  post: FullPost;
   index: number;
 };
 const responsive = {
@@ -51,10 +51,10 @@ const PostListCard = ({ post, index }: Props) => {
   }
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div className="border border-gray-200 shadow-md rounded-lg max-w-[500px] mx-auto h-[750px] mb-4">
+    <div className=" border border-gray-200 shadow-md rounded-lg mx-auto max-w-[30vw] mb-4">
       <Link
-        href={"/"}
-        className="h-[70px] w-32 mt-2 ms-2 border-b flex items-center"
+        href={`/user/${id}`}
+        className="h-16 w-32 mt-2 ms-2 border-b flex items-center"
       >
         {/*eslint-disable-next-line @next/next/no-img-element*/}
         <Avatar image={userImage} size="small" />
@@ -78,7 +78,7 @@ const PostListCard = ({ post, index }: Props) => {
       {openModal && (
         <ModalProtal>
           <PostModal onClose={() => setOpenModal(false)}>
-            <PostDetail items={images} post={post} />
+            <PostDetail items={images} post={post} size="detail" />
           </PostModal>
         </ModalProtal>
       )}

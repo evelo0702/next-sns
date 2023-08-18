@@ -14,34 +14,60 @@ const responsive = {
 };
 type Props = {
   items: string[];
-  size: "detail" | "home";
-  openModal: boolean;
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  size: "detail" | "home" | "postDetail";
+  openModal?: boolean;
+  setOpenModal?: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const ImageCarousel = ({ items, size, openModal, setOpenModal }: Props) => {
+const ImageCarousel = ({
+  items,
+  size,
+  openModal = false,
+  setOpenModal,
+}: Props) => {
   return (
     <div>
-      {size === "home" ? (
+      {size === "home" && (
         <Carousel
-          containerClass="w-full  h-[500px] flex z-30"
+          containerClass="max-w-[35vw] max-h-[40vh] flex z-30"
+          itemClass=""
+          responsive={responsive}
+        >
+          {setOpenModal != undefined &&
+            items.map((item, index) => (
+              <button onClick={() => setOpenModal(!openModal)} key={index}>
+                <Image
+                  className="object-cover aspect-square w-[35vw] h-[40vh]"
+                  src={item}
+                  alt=""
+                  width={500}
+                  height={500}
+                />
+              </button>
+            ))}
+        </Carousel>
+      )}
+      {size == "detail" && (
+        <Carousel
+          containerClass="w-[35vw] h-[60vh] flex"
           itemClass=""
           responsive={responsive}
         >
           {items.map((item, index) => (
-            <button onClick={() => setOpenModal(!openModal)} key={index}>
+            <div key={index}>
               <Image
-                className="object-cover aspect-square w-[500px] h-[500px]"
+                className="object-cover aspect-square w-[35vw] h-[60vh]"
                 src={item}
                 alt=""
                 width={500}
                 height={500}
               />
-            </button>
+            </div>
           ))}
         </Carousel>
-      ) : (
+      )}
+      {size == "postDetail" && (
         <Carousel
-          containerClass="w-[35vw] h-[60vh] flex"
+          containerClass="w-[35vw] h-[60vh] flex overflow-auto"
           itemClass=""
           responsive={responsive}
         >

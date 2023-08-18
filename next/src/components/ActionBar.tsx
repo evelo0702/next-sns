@@ -16,7 +16,7 @@ export default function ActionBar({
   content,
 }: Props) {
   return (
-    <>
+    <div className="relative">
       <div className="flex justify-between my-2 px-4">
         <HeartIcon />
         <BookmarkIcon />
@@ -31,6 +31,6 @@ export default function ActionBar({
         </p>
         {detail == false ? <p>{commentsCount}</p> : null}
       </div>
-    </>
+    </div>
   );
 }

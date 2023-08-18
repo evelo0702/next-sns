@@ -12,6 +12,7 @@ const UserSearch = () => {
     isLoading,
     error,
   } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
   };
@@ -35,7 +36,7 @@ const UserSearch = () => {
         {users &&
           users.map((user) => (
             <li key={user.email}>
-              <UserCard user={user} />
+              <UserCard user={user} size="small" />
             </li>
           ))}
       </ul>

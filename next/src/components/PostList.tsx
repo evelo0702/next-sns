@@ -1,21 +1,16 @@
 "use client";
-import { SimplePost } from "@/app/model/post";
+import { FullPost, SimplePost } from "@/app/model/post";
 import React from "react";
 import { GridLoader } from "react-spinners";
 import useSWR from "swr";
 import PostListCard from "./PostListCard";
 
 const PostList = () => {
-  const { data: posts, isLoading: loading } =
-    useSWR<SimplePost[]>("/api/posts");
+  const { data: posts, isLoading: loading } = useSWR<FullPost[]>("/api/posts");
   return (
     <div>
       <section>
-        {loading && (
-          <div className="font-bold">
-            Loading...
-          </div>
-        )}
+        {loading && <div className="font-bold">Loading...</div>}
         {posts && (
           <ul>
             {posts.map((post, index) => (

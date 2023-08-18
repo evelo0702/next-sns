@@ -16,7 +16,7 @@ const PostModal = ({ onClose, children }: Props) => {
     >
       <button
         onClick={() => onClose()}
-        className="mx-auto w-[70vw] flex justify-end relative top-32 right-14"
+        className="mx-auto w-[70vw] flex justify-end relative top-52 right-10"
       >
         <CloseIcon />
       </button>

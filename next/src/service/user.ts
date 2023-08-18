@@ -37,13 +37,37 @@ export function searchUsers(keyword?: string) {
     : "";
   return client
     .fetch(
-      `*[_type == 'user' ${query}]{
+      `*[_type == 'user' ${query}][0]{
     ...,
     following[]->{id,image},
     followers[]->{id,image},
     "followingNum":count(following),
-    "followersNum":count(followers)
+    "followersNum":count(followers),
+    "posts":count(*[_type=='post' && author->id =="${keyword}"]),
   }`
+    )
+    .then((user) => ({
+      ...user,
+      followingNum: user.followingNum ?? 0,
+      followersNum: user.followersNum ?? 0,
+    }))
+    .catch((error) => console.error(error));
+}
+export async function searchUsers2(keyword?: string) {
+  const query = keyword
+    ? `&& (name match "${keyword}") || (username match "${keyword}")`
+    : "";
+  return client
+    .fetch(
+      `*[_type =="user" ${query}]{
+      ...,
+      following[]->{id,image},
+      followers[]->{id,image},
+      "followingNum":count(following),
+      "followersNum":count(followers),
+      "posts":count(*[_type=='post' && author->id =="${keyword}"]),
+    }
+    `
     )
     .then((users) =>
       users.map((user: SearchUser) => ({
