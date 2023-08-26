@@ -1,18 +1,16 @@
 "use client";
-import { FullPost, SimplePost } from "@/app/model/post";
+import { FullPost } from "@/app/model/post";
 import React, { useState } from "react";
 import Avatar from "./Avatar";
 import Link from "next/link";
 import ActionBar from "./ActionBar";
-import CommentForm from "./CommentForm";
 import ImageCarousel from "./ImageCarousel";
 import ModalProtal from "./ui/ModalProtal";
-import PostModal from "./PostModal";
 import PostDetail from "./PostDetail";
 
 type Props = {
   post: FullPost;
-  index: number;
+  bookmarked: boolean;
 };
 const responsive = {
   desk: {
@@ -25,7 +23,7 @@ const responsive = {
   },
 };
 
-const PostListCard = ({ post, index }: Props) => {
+const PostListCard = ({ post, bookmarked }: Props) => {
   const {
     userImage,
     id,
@@ -50,8 +48,12 @@ const PostListCard = ({ post, index }: Props) => {
     images.push(post.image4);
   }
   const [openModal, setOpenModal] = useState(false);
+
   return (
-    <div className=" border border-gray-200 shadow-md rounded-lg mx-auto max-w-[30vw] mb-4">
+    <div
+      className=" border border-gray-200 shadow-md 
+    rounded-lg mx-auto tablet:w-[55vw] desktop:w-[40vw] mb-4"
+    >
       <Link
         href={`/user/${id}`}
         className="h-16 w-32 mt-2 ms-2 border-b flex items-center"
@@ -73,13 +75,19 @@ const PostListCard = ({ post, index }: Props) => {
         createdAt={createdAt}
         commentsCount={commentsCount}
         detail={false}
+        post={post}
+        bookmarked={bookmarked}
       />
 
       {openModal && (
         <ModalProtal>
-          <PostModal onClose={() => setOpenModal(false)}>
-            <PostDetail items={images} post={post} size="detail" />
-          </PostModal>
+          <PostDetail
+            items={images}
+            post={post}
+            size="detail"
+            onClose={() => setOpenModal(false)}
+            bookmarked={bookmarked}
+          />
         </ModalProtal>
       )}
     </div>

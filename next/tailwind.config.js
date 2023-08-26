@@ -22,6 +22,15 @@ module.exports = {
         avatarGradientStart: "#a1c4fd",
         avatarGradientEnd: "#4286f4",
       },
+      screens: {
+        mobile: "320px",
+
+        tablet: "640px",
+        // => @media (min-width: 640px) { ... }
+
+        desktop: "1024px",
+        // => @media (min-width: 1280px) { ... }
+      },
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],

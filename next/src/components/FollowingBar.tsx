@@ -4,15 +4,13 @@ import useSWR from "swr";
 import Link from "next/link";
 import Avatar from "./Avatar";
 import ScrollableBar from "./ScrollableBar";
-
 const FollowingBar = () => {
   const { data, error, isLoading: loading } = useSWR<DetailUser>(`/api/me`);
   const users = data?.following;
-
   return (
-    <section className="w-full  p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto bg-white relative z-0">
+    <section className="w-full  p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto  bg-white relative z-0">
       {loading ? (
-        <div className="font-bold">Loading... </div>
+        <div className="font-bold">Loading...</div>
       ) : users && users.length > 0 ? (
         <ScrollableBar>
           {users.map((user, index) => (

@@ -44,6 +44,7 @@ export function searchUsers(keyword?: string) {
     "followingNum":count(following),
     "followersNum":count(followers),
     "posts":count(*[_type=='post' && author->id =="${keyword}"]),
+    bookmarks[]->{_id}
   }`
     )
     .then((user) => ({
@@ -66,6 +67,7 @@ export async function searchUsers2(keyword?: string) {
       "followingNum":count(following),
       "followersNum":count(followers),
       "posts":count(*[_type=='post' && author->id =="${keyword}"]),
+      bookmarks[]->{_id}
     }
     `
     )
@@ -76,4 +78,22 @@ export async function searchUsers2(keyword?: string) {
         followersNum: user.followersNum ?? 0,
       }))
     );
+}
+export function addBookmark(userId: string, postId: string) {
+  return client
+    .patch(userId) //
+    .setIfMissing({ bookmarks: [] })
+    .append("bookmarks", [
+      {
+        _ref: postId,
+        _type: "reference",
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true });
+}
+export function removeBookmark(userId: string, postId: string) {
+  return client
+    .patch(userId)
+    .unset([`bookmarks[_ref=="${postId}"]`])
+    .commit();
 }

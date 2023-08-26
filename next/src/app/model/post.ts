@@ -20,4 +20,5 @@ export type FullPost = {
   likesCount: number;
   commentsCount: number;
   comments: Comment[];
+  _id: string;
 };

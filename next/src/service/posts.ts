@@ -27,6 +27,7 @@ export async function getFollowingPostsOf(email: string) {
     .then((posts) =>
       posts.map((post: SimplePost) => ({
         ...post,
+        likes: post.likes ?? [],
         image1: urlFor(post.image1),
         image2: urlFor(post.image2),
         image3: urlFor(post.image3),
@@ -59,6 +60,7 @@ export function getUserPost(id: string) {
     .then((posts) =>
       posts.map((post: SimplePost) => ({
         ...post,
+        likes: post.likes ?? [],
         image1: urlFor(post.image1),
         image2: urlFor(post.image2),
         image3: urlFor(post.image3),
@@ -90,6 +92,7 @@ export function getUserBookmarks(id: string) {
     .then((posts) =>
       posts.map((post: SimplePost) => ({
         ...post,
+        likes: post.likes ?? [],
         image1: urlFor(post.image1),
         image2: urlFor(post.image2),
         image3: urlFor(post.image3),
@@ -121,10 +124,29 @@ export function getUserLikes(id: string) {
     .then((posts) =>
       posts.map((post: SimplePost) => ({
         ...post,
+        likes: post.likes ?? [],
         image1: urlFor(post.image1),
         image2: urlFor(post.image2),
         image3: urlFor(post.image3),
         image4: urlFor(post.image4),
       }))
     );
+}
+export function likePost(postId: string, userId: string) {
+  return client
+    .patch(postId) //
+    .setIfMissing({ likes: [] })
+    .append("likes", [
+      {
+        _ref: userId,
+        _type: "reference",
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true });
+}
+export function dislikePost(postId: string, userId: string) {
+  return client
+    .patch(postId)
+    .unset([`likes[_ref=="${userId}"]`])
+    .commit();
 }

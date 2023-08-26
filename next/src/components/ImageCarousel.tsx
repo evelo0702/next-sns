@@ -28,15 +28,19 @@ const ImageCarousel = ({
     <div>
       {size === "home" && (
         <Carousel
-          containerClass="max-w-[35vw] max-h-[40vh] flex z-30"
+          containerClass="max-h-[40vh] flex z-30"
           itemClass=""
           responsive={responsive}
         >
           {setOpenModal != undefined &&
             items.map((item, index) => (
-              <button onClick={() => setOpenModal(!openModal)} key={index}>
+              <button
+                onClick={() => setOpenModal(!openModal)}
+                key={index}
+                className="mobile:w-[80vw] tablet:w-[55vw] desktop:w-[40vw]"
+              >
                 <Image
-                  className="object-cover aspect-square w-[35vw] h-[40vh]"
+                  className=" object-cover aspect-square w-full h-[40vh]"
                   src={item}
                   alt=""
                   width={500}
@@ -48,7 +52,7 @@ const ImageCarousel = ({
       )}
       {size == "detail" && (
         <Carousel
-          containerClass="w-[35vw] h-[60vh] flex"
+          containerClass="w-[35vw] h-[60vh] flex z-30"
           itemClass=""
           responsive={responsive}
         >
@@ -67,7 +71,7 @@ const ImageCarousel = ({
       )}
       {size == "postDetail" && (
         <Carousel
-          containerClass="w-[35vw] h-[60vh] flex overflow-auto"
+          containerClass="w-[35vw] h-[60vh] flex overflow-auto z-30"
           itemClass=""
           responsive={responsive}
         >

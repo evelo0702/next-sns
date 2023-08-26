@@ -10,7 +10,6 @@ export default async function Home() {
   if (!user) {
     redirect("/auth/signin");
   }
-
   return (
     <section className="w-full flex flex-col p-4 md:flex-row ">
       <div className="w-3/4 mx-auto min-w-0">

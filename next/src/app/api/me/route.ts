@@ -11,5 +11,6 @@ export async function GET() {
   let userData = getUserByUsername(user.email).then((data) =>
     NextResponse.json(data)
   );
+
   return userData;
 }

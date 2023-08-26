@@ -30,7 +30,6 @@ const authOptions: NextAuthOptions = {
       if (!user.email) {
         return false;
       }
-
       addUser({
         id: user.id.split("__")[0].split("-")[1] || user.id,
         name: user.name || "",
@@ -40,15 +39,22 @@ const authOptions: NextAuthOptions = {
       });
       return true;
     },
-    async session({ session }) {
+    async session({ session, token }) {
       const user = session?.user;
       if (user) {
         session.user = {
           ...user,
           id: user.email?.split("@")[0] || "",
+          id2: token.id as string,
         };
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
     },
   },
   pages: {
