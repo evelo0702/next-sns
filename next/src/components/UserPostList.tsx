@@ -4,24 +4,36 @@ import Image from "next/image";
 import ModalProtal from "./ui/ModalProtal";
 import PostModal from "./PostModal";
 import PostDetail from "./PostDetail";
-const UserPostList = ({ item }: any) => {
+import { DetailUser } from "@/app/model/user";
+
+import useSWR, { mutate } from "swr";
+const UserPostList = ({ post, userId, tab }: any) => {
+  const handlePostComment = (comment: string) => {
+    fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify({ id: post?.postId, comment }),
+    }).then(() => mutate(`/api/userPosts/${userId}/${tab}`));
+  };
   const [openModal, setOpenModal] = useState(false);
   const images = [];
-  images.push(item.image1);
-  if (item.image2 != null) {
-    images.push(item.image2);
+  images.push(post.image1);
+  if (post.image2 != null) {
+    images.push(post.image2);
   }
-  if (item.image3 != null) {
-    images.push(item.image3);
+  if (post.image3 != null) {
+    images.push(post.image3);
   }
-  if (item.image4 != null) {
-    images.push(item.image4);
+  if (post.image4 != null) {
+    images.push(post.image4);
   }
+  const { data } = useSWR<DetailUser>(`/api/me`);
+  const bookmark = data?.bookmarks;
+  let bookmarked = bookmark?.includes(post.postId) ? true : false;
   return (
-    <div key={item._id} className="cursor-pointer">
-      <div className="m-4 w-full h-full">
+    <div key={post._id} className="cursor-pointer me-2">
+      <div className="m-4 w-full h-full mt-8">
         <Image
-          src={item.image1}
+          src={post.image1}
           width={500}
           height={500}
           alt=""
@@ -32,9 +44,16 @@ const UserPostList = ({ item }: any) => {
       </div>
       {openModal && images && (
         <ModalProtal>
-          <PostModal onClose={() => setOpenModal(false)}>
-            <PostDetail items={images} post={item} size="postDetail" />
-          </PostModal>
+          <PostDetail
+            items={images}
+            post={post}
+            size="postDetail"
+            onClose={() => setOpenModal(false)}
+            bookmarked={bookmarked}
+            userId={userId}
+            tab={tab}
+            onPostComment={handlePostComment}
+          />
         </ModalProtal>
       )}
     </div>

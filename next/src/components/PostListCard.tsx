@@ -7,6 +7,8 @@ import ActionBar from "./ActionBar";
 import ImageCarousel from "./ImageCarousel";
 import ModalProtal from "./ui/ModalProtal";
 import PostDetail from "./PostDetail";
+import CommentForm from "./CommentForm";
+import { mutate } from "swr";
 
 type Props = {
   post: FullPost;
@@ -47,8 +49,13 @@ const PostListCard = ({ post, bookmarked }: Props) => {
   if (post.image4 != null) {
     images.push(post.image4);
   }
+  const handlePostComment = (comment: string) => {
+    fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify({ id: post?.postId, comment }),
+    }).then(() => mutate("/api/posts"));
+  };
   const [openModal, setOpenModal] = useState(false);
-
   return (
     <div
       className=" border border-gray-200 shadow-md 
@@ -70,6 +77,7 @@ const PostListCard = ({ post, bookmarked }: Props) => {
         setOpenModal={setOpenModal}
       />
       <ActionBar
+        mode="HomePage"
         likes={likes}
         content={content}
         createdAt={createdAt}
@@ -77,7 +85,10 @@ const PostListCard = ({ post, bookmarked }: Props) => {
         detail={false}
         post={post}
         bookmarked={bookmarked}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
       />
+      <CommentForm onPostComment={handlePostComment} />
 
       {openModal && (
         <ModalProtal>
@@ -87,6 +98,7 @@ const PostListCard = ({ post, bookmarked }: Props) => {
             size="detail"
             onClose={() => setOpenModal(false)}
             bookmarked={bookmarked}
+            onPostComment={handlePostComment}
           />
         </ModalProtal>
       )}

@@ -1,7 +1,7 @@
 import { RiBookmarkLine } from "react-icons/ri";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 type Props = {
-  bookmarked: boolean;
+  bookmarked?: boolean;
 };
 export default function BookmarkIcon({ bookmarked }: Props) {
   return (

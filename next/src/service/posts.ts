@@ -45,6 +45,7 @@ export function getUserPost(id: string) {
     {
       ...,
     "id":author->id,
+    "postId":_id,
     "userImage" : author->image,
     "image1" : photo1,
     "image2" : photo2 ,
@@ -149,4 +150,19 @@ export function dislikePost(postId: string, userId: string) {
     .patch(postId)
     .unset([`likes[_ref=="${userId}"]`])
     .commit();
+}
+export function addComment(postId: string, userId: string, comment: string) {
+  return client
+    .patch(postId) //
+    .setIfMissing({ comments: [] })
+    .append("comments", [
+      {
+        comment,
+        author: {
+          _ref: userId,
+          _type: "reference",
+        },
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true });
 }

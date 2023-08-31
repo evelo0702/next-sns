@@ -1,23 +1,20 @@
 import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { dislikePost, likePost } from "@/service/posts";
+import { NextRequest, NextResponse } from "next/server";
+import { addComment } from "@/service/posts";
 
-export async function PUT(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
   if (!user) {
     return new Response("Authentication Error", { status: 401 });
   }
-  const { id, like } = await req.json();
-  if (!id || like === undefined) {
+  const { id, comment } = await req.json();
+  if (!id || comment === undefined) {
     return new Response("Bad Request", { status: 400 });
   }
-  const request = like ? likePost : dislikePost;
-  console.log(id);
-  console.log(user.id2);
-  return request(id, user.id2)
+  return addComment(id, user.id2, comment)
     .then((res) => NextResponse.json(res))
     .catch((error) => new Response(JSON.stringify(error), { status: 500 }));
 }

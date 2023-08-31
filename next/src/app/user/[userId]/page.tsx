@@ -15,11 +15,11 @@ const UserDetailPage = async ({ params: { userId } }: Props) => {
   if (!user) {
     notFound();
   }
-  
+
   return (
     <>
       <div className="h-full w-full p-4">
-        <div className="w-2/5 mx-auto mt-4 mb-4">
+        <div className="tablet:w-3/5 desktop:w-[40vw] mx-auto mt-4 mb-4">
           <UserCard user={user} size="big" />
         </div>
         <div className="mx-auto w-5/6 border-t border-neutral-300">

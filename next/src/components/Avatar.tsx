@@ -31,7 +31,11 @@ const Avatar = ({ image, size = "normal" }: Props) => {
         </div>
       )}
       {size === "big" && (
-        <div className="me-2  rounded-full flex justify-center items-center   w-24  h-24 bg-gradient-to-tr font-bold from-avatarGradientStart to-avatarGradientEnd">
+        <div
+          className="me-2  rounded-full flex justify-center 
+          items-center   w-24 h-24 
+          bg-gradient-to-tr font-bold from-avatarGradientStart to-avatarGradientEnd"
+        >
           {/*eslint-disable-next-line @next/next/no-img-element*/}
           <img
             src={image}

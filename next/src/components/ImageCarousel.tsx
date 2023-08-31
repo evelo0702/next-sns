@@ -37,14 +37,16 @@ const ImageCarousel = ({
               <button
                 onClick={() => setOpenModal(!openModal)}
                 key={index}
-                className="mobile:w-[80vw] tablet:w-[55vw] desktop:w-[40vw]"
+                className="mobile:w-[80vw] tablet:w-[55vw] 
+                desktop:w-[40vw] relative mobile:h-[20vh] tablet:h-[40vh]"
               >
                 <Image
-                  className=" object-cover aspect-square w-full h-[40vh]"
+                  className=" object-cover aspect-square"
                   src={item}
                   alt=""
-                  width={500}
-                  height={500}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </button>
             ))}

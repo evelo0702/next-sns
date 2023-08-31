@@ -14,9 +14,6 @@ const UserContent = ({ userId }: any) => {
     isLoading: loading,
     error: isError,
   } = useSWR(`/api/userPosts/${userId}/${tab}`);
-  // /api/userPosts/${userId}/posts
-  // /api/userPosts/${userId}/likes
-  // /api/userPosts/${userId}/bookmarks
   const { data: session } = useSession();
   const user = session?.user;
   const isShow = user && user.id === userId;
@@ -55,10 +52,18 @@ const UserContent = ({ userId }: any) => {
           </>
         )}
       </div>
-      <div className="grid grid-cols-3 mt-4">
+      <div
+        className="tablet:grid grid-cols-3 mt-4
+       mobile:h-[50vh] mobile:w-[80vw]"
+      >
         {userPost
           ? userPost.map((item: any) => (
-              <UserPostList item={item} key={item._id} />
+              <UserPostList
+                post={item}
+                key={item._id}
+                userId={userId}
+                tab={tab}
+              />
             ))
           : null}
       </div>
