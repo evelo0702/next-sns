@@ -18,4 +18,5 @@ export type SearchUser = User & {
   followingNum: number;
   followersNum: number;
   posts: number;
+  _id?: string;
 };

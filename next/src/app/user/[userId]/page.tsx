@@ -2,8 +2,8 @@ import { getUserByUsername, searchUsers } from "@/service/user";
 import { notFound } from "next/navigation";
 import React from "react";
 import UserCard from "@/components/UserCard";
-import UserPostList from "@/components/UserPostList";
 import UserContent from "@/components/UserContent";
+import useSWR from "swr";
 import { Metadata } from "next";
 type Props = {
   params: {

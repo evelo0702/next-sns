@@ -11,8 +11,19 @@ type Props = {
   size: "small" | "big";
 };
 const UserCard = ({
-  user: { name, id, image, followersNum, followingNum, posts, following },
+  user: {
+    name,
+    id,
+    image,
+    followersNum,
+    followingNum,
+    posts,
+    following,
+    followers,
+    _id,
+  },
   size,
+  user,
 }: Props) => {
   return (
     <>
@@ -31,7 +42,7 @@ const UserCard = ({
                 <p className="text-black font-bold leading-4 me-4 text-2xl">
                   {id}
                 </p>
-                <FollowBtn following={following} id={id} />
+                <FollowBtn followers={followers} id={id} _id={_id} />
               </div>
               <div className="flex items-center">
                 <p className="mb-1 mt-1 font-bold me-2 text-lg">{name}</p>
