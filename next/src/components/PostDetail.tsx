@@ -35,7 +35,7 @@ const PostDetail = ({
     >
       <div className="mx-auto h-full  flex items-center  px-4 ">
         <section
-          className="flex w-[68vw]  mx-auto items-center 
+          className="flex w-[68vw] xl:w-[60vw] mx-auto items-center 
           justify-center rounded-xl bg-white shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8"
         >
           <ImageCarousel items={items} size={size} />

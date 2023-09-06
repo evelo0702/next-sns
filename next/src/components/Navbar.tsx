@@ -15,11 +15,13 @@ const Navbar = () => {
   const user = session?.user;
   const navMenu = [
     {
+      name: "Search",
       href: "/search",
       icon: <SearchIcon />,
       clicked: <SearchFillIcon />,
     },
     {
+      name: "New",
       href: "/new",
       icon: <NewIcon />,
       clicked: <NewFillIcon />,
@@ -49,7 +51,12 @@ const Navbar = () => {
             {navMenu.map((item) => (
               <div key={item.href} className="me-4">
                 <Link href={item.href}>
-                  {pathName === item.href ? item.clicked : item.icon}
+                  <div className="flex">
+                    <p className="me-2">
+                      {pathName === item.href ? item.clicked : item.icon}
+                    </p>
+                    <p className="font-bold">{item.name}</p>
+                  </div>
                 </Link>
               </div>
             ))}

@@ -54,7 +54,7 @@ const UserContent = ({ userId }: any) => {
       </div>
       <div
         className="tablet:grid grid-cols-3 mt-4
-       mobile:h-[50vh] mobile:w-[80vw]"
+       mobile:h-[50vh] mobile:w-[80vw] xl:w-full"
       >
         {userPost
           ? userPost.map((item: any) => (

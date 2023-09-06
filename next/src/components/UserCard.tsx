@@ -43,11 +43,12 @@ const UserCard = ({
                 <p className="text-black font-bold leading-4 me-4 text-2xl">
                   {id}
                 </p>
+                <p>{name}</p>
                 <FollowBtn followers={followers} id={id} _id={_id} />
               </div>
               <div className="text-sm leading-4 mt-3">
                 <span className="font-bold text-black me-1">
-                  {followersNum}{" "}
+                  {followersNum}
                 </span>
                 <span className="me-4">followers</span>
                 <span className="font-bold text-black me-1">
@@ -74,7 +75,8 @@ const UserCard = ({
           <Avatar image={image} size="normal" />
           <div className="text-black ms-4 mb-2">
             <div className="flex items-center">
-              <p className="mb-1 mt-1 font-bold me-2  text-xl">{name}</p>
+              <p className="mb-1 mt-1 font-bold me-2  text-xl">{id}</p>
+              <p>{name}</p>
             </div>
             <p className="text-sm leading-4">
               {`${followersNum} followers ${followingNum} following`}
