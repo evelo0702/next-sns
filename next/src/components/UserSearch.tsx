@@ -12,7 +12,6 @@ const UserSearch = () => {
     isLoading,
     error,
   } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
-
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
   };

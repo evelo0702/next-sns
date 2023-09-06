@@ -1,7 +1,7 @@
 "use client";
 import { simpleUser } from "@/app/model/user";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 type Props = {
   followers: simpleUser[];
@@ -11,6 +11,7 @@ type Props = {
 const FollowBtn = ({ followers, id, _id }: Props) => {
   const { data: session } = useSession();
   const router = useRouter();
+
   const user = session?.user;
   const isShow = user && user.id !== id;
   const isFollow: boolean =
@@ -21,7 +22,8 @@ const FollowBtn = ({ followers, id, _id }: Props) => {
       body: JSON.stringify({ id: targetId, follow: isFollow }),
     })
       .then((res) => res.json())
-      .then(() => location.reload());
+      .then(() => router.refresh());
+    // .then(() => location.reload());
   };
   return (
     <>

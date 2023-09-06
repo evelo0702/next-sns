@@ -5,17 +5,16 @@ import { GridLoader } from "react-spinners";
 import useSWR from "swr";
 import PostListCard from "./PostListCard";
 import { DetailUser } from "@/app/model/user";
+import { redirect } from "next/navigation";
 
 const PostList = () => {
   const { data: posts, isLoading: loading } = useSWR<FullPost[]>("/api/posts");
   const { data } = useSWR<DetailUser>(`/api/me`);
   const bookmarked = data?.bookmarks;
-
   return (
     <div>
       <section>
-        {loading && <div className="font-bold">Loading...</div>}
-        {posts && (
+        {posts && posts.length > 0 && (
           <ul>
             {posts.map((post, index) => (
               <li key={index}>

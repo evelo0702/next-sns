@@ -1,12 +1,12 @@
 import { FullPost, SimplePost } from "@/app/model/post";
-import { client, urlFor } from "./sanity";
+import { assetsURL, client, urlFor } from "./sanity";
 
-export async function getFollowingPostsOf(email: string) {
+export async function getFollowingPostsOf(id: string) {
   return client
     .fetch(
-      `*[_type =='post' && author->email == "${email}"
-  || author._ref in *[_type == 'user' && email == "${email}" ].following[]._ref]
-  | order(_createAt desc){
+      `*[_type =='post' && author->id == "${id}"
+  || author._ref in *[_type == 'user' && id == "${id}"].following[]._ref]
+  | order(_createdAt desc){
        ...,
    "id": author->id,
     "userImage" : author->image,
@@ -41,7 +41,7 @@ export function getUserPost(id: string) {
     .fetch(
       `*[_type =='post' 
     && author->id == "${id}"] 
-    | order(_createAt desc)
+    | order(_createdAt desc)
     {
       ...,
     "id":author->id,
@@ -74,7 +74,7 @@ export function getUserBookmarks(id: string) {
     .fetch(
       `*[_type =='post' 
     && _id in *[_type=='user' && id == '${id}'].bookmarks[]._ref] 
-    | order(_createAt desc)
+    | order(_createdAt desc)
     {
       ...,
     "id":author->id,
@@ -106,7 +106,7 @@ export function getUserLikes(id: string) {
     .fetch(
       `*[_type =='post' 
     && "${id}" in likes[]->id] 
-    | order(_createAt desc)
+    | order(_createdAt desc)
     {
       ...,
     "id":author->id,
@@ -165,4 +165,37 @@ export function addComment(postId: string, userId: string, comment: string) {
       },
     ])
     .commit({ autoGenerateArrayKeys: true });
+}
+
+export async function createPost(
+  userId: string,
+  content: string,
+  files0: Blob,
+  files1?: Blob,
+  files2?: Blob,
+  files3?: Blob
+) {
+  const files = [files0, files1, files2, files3];
+
+  return fetch(assetsURL, {
+    method: "POST",
+    headers: {
+      "content-type": files0.type,
+      authorization: `Bearer ${process.env.SANITY_SECRET_TOKEN}`,
+    },
+    body: files0,
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      return client.create(
+        {
+          _type: "post",
+          author: { _ref: userId },
+          photo1: { asset: { _ref: result.document._id } },
+          content: content,
+          likes: [],
+        },
+        { autoGenerateArrayKeys: true }
+      );
+    });
 }

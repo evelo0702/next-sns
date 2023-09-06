@@ -38,7 +38,7 @@ const ImageCarousel = ({
                 onClick={() => setOpenModal(!openModal)}
                 key={index}
                 className="mobile:w-[80vw] tablet:w-[55vw] 
-                desktop:w-[40vw] relative mobile:h-[20vh] tablet:h-[40vh]"
+                desktop:w-[40vw] xl:w-[30vw] relative mobile:h-[20vh] tablet:h-[40vh]"
               >
                 <Image
                   className=" object-cover aspect-square"

@@ -20,7 +20,7 @@ const Navbar = () => {
       clicked: <SearchFillIcon />,
     },
     {
-      href: "/write",
+      href: "/new",
       icon: <NewIcon />,
       clicked: <NewFillIcon />,
     },

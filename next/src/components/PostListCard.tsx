@@ -59,7 +59,7 @@ const PostListCard = ({ post, bookmarked }: Props) => {
   return (
     <div
       className=" border border-gray-200 shadow-md 
-    rounded-lg mx-auto tablet:w-[55vw] desktop:w-[40vw] mb-4"
+    rounded-lg mx-auto tablet:w-[55vw] desktop:w-[40vw] xl:w-[30vw] mb-4"
     >
       <Link
         href={`/user/${id}`}

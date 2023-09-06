@@ -28,7 +28,15 @@ const FollowingBar = () => {
         </ScrollableBar>
       ) : (
         <>
-          <p className="flex items-center justify-center font-bold">{`팔로잉한 사람이 없습니다`}</p>
+          <div className="mt-4 flex items-center justify-center font-bold">
+            팔로잉한 사람이 없습니다
+          </div>
+          <div className="mt-4 mb-4 flex items-center justify-center font-bold">
+            <Link href={`/search`} className="font-bold text-sky-700 text-lg">
+              검색창
+            </Link>
+            에서 유저를 찾아보세요
+          </div>
         </>
       )}
     </section>

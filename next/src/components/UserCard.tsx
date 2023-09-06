@@ -34,6 +34,7 @@ const UserCard = ({
             className="flex w-full 
             rounded-xl border border-neutral-300 mb-2 p-4
              bg-white hover:bg-neutral-200
+             
              "
           >
             <Avatar image={image} size="big" />
@@ -44,13 +45,22 @@ const UserCard = ({
                 </p>
                 <FollowBtn followers={followers} id={id} _id={_id} />
               </div>
-              <div className="flex items-center">
-                <p className="mb-1 mt-1 font-bold me-2 text-lg">{name}</p>
-                <p className="text-sm font-bold">{posts} posts</p>
+              <div className="text-sm leading-4 mt-3">
+                <span className="font-bold text-black me-1">
+                  {followersNum}{" "}
+                </span>
+                <span className="me-4">followers</span>
+                <span className="font-bold text-black me-1">
+                  {followingNum}
+                </span>
+                <span className="">following</span>
               </div>
-              <p className="text-sm leading-4 font-bold">
-                {`${followersNum} followers ${followingNum} following`}
-              </p>
+              <div className="flex items-center mt-2">
+                <p className="text-sm">
+                  <span className="font-bold text-black me-1">{posts}</span>{" "}
+                  posts
+                </p>
+              </div>
             </div>
           </Link>
         )}
@@ -58,20 +68,15 @@ const UserCard = ({
       {size == "small" && (
         <Link
           href={`/user/${id}`}
-          className="flex items-center w-full rounded-xl border border-neutral-300 mb-2 p-4 bg-white hover:bg-neutral-100"
+          className="flex items-center w-full rounded-xl border 
+          border-neutral-300 mb-2 p-4 bg-white hover:bg-neutral-100"
         >
           <Avatar image={image} size="normal" />
-          <div className="text-neutral-500 ms-4">
+          <div className="text-black ms-4 mb-2">
             <div className="flex items-center">
-              <p className="text-black font-bold leading-4 me-4 text-lg">
-                {id}
-              </p>
+              <p className="mb-1 mt-1 font-bold me-2  text-xl">{name}</p>
             </div>
-            <div className="flex items-center">
-              <p className="mb-1 mt-1 font-bold me-2  text-base">{name}</p>
-              <p className="text-sm font-bold">{posts} posts</p>
-            </div>
-            <p className="text-sm leading-4 font-bold">
+            <p className="text-sm leading-4">
               {`${followersNum} followers ${followingNum} following`}
             </p>
           </div>
