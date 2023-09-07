@@ -1,7 +1,7 @@
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 const GridLoader = dynamic(
-  () => import('react-spinners').then((lib) => lib.GridLoader),
+  () => import("react-spinners").then((lib) => lib.GridLoader),
   {
     ssr: false,
   }
@@ -10,6 +10,6 @@ const GridLoader = dynamic(
 type Props = {
   color?: string;
 };
-export default function GridSpinner({ color = 'red' }: Props) {
+export default function GridSpinner({ color = "sky" }: Props) {
   return <GridLoader color={color} />;
 }

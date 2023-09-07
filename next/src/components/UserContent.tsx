@@ -52,6 +52,11 @@ const UserContent = ({ userId }: any) => {
           </>
         )}
       </div>
+      {userPost?.length == 0 && (
+        <div className="w-full text-center text-base mt-32 font-bold">
+          등록하신 게시물이 없습니다
+        </div>
+      )}
       <div
         className="tablet:grid grid-cols-3 mt-4
        mobile:h-[50vh] mobile:w-[80vw] xl:w-full"

@@ -43,7 +43,7 @@ const UserCard = ({
                 <p className="text-black font-bold leading-4 me-4 text-2xl">
                   {id}
                 </p>
-                <p>{name}</p>
+                <p className="me-2">{name}</p>
                 <FollowBtn followers={followers} id={id} _id={_id} />
               </div>
               <div className="text-sm leading-4 mt-3">

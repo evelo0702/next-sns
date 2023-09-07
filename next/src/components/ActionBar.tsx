@@ -51,7 +51,9 @@ export default function ActionBar({
     fetch("/api/likes", {
       method: "PUT",
       body: JSON.stringify({ id: post?.postId, like }),
-    }).then(() => mutate(`/api/userPosts/${userId}/${tab}`));
+    })
+      .then(() => mutate(`/api/userPosts/${userId}/${tab}`))
+      .then(() => mutate(`/api/posts`));
   };
   const handleBookmark = (bookmark: boolean) => {
     fetch("/api/bookmarks", {

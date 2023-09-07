@@ -28,7 +28,8 @@ const UserPostList = ({ post, userId, tab }: any) => {
   }
   const { data } = useSWR<DetailUser>(`/api/me`);
   const bookmark = data?.bookmarks;
-  let bookmarked = bookmark?.includes(post.postId) ? true : false;
+  let bookmarked = bookmark?.includes(post._id) ? true : false;
+  console.log(bookmarked);
   return (
     <div key={post._id} className="cursor-pointer me-2">
       <div className="m-4 w-full h-full mt-8">
